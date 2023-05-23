@@ -32,11 +32,12 @@ jobs:
         key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environments.yml') }}
     - uses: conda-incubator/setup-miniconda@v2
       with:
+        activate-environment: study-django
         miniconda-version: "latest"
         channels: conda-forge, defaults
         use-only-tar-bz2: true
         auto-update-conda: true
-        activate-environment: study-django
+        environment-file: backend/environment.yml
     - name: Run pylama
       run: pylama -o FILE backend/pylama.ini
       working-directory: ./backend
