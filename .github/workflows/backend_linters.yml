@@ -18,8 +18,5 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    defaults:
-      run:
-        shell: bash -l {0}
     steps:
     - uses: actions:/checkout@v2
