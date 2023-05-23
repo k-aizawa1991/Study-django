@@ -2,14 +2,44 @@ name: Backend Linters
 
 on:
   pull_request:
+    paths:
+      - 'backend/**'
   push:
     branches:
       - main
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-20.04
-    permissions:
-      contents: read
+    defaults:
+      run:
+        shell: bash -l {0}
     steps:
     - uses: actions/checkout@v3
+    - name: Cache conda
+      uses: actions/cache@v3
+      env:
+        CACHE_NUMBER: 0
+      with:
+        path: ~/conda_pkgs_dir
+        key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environments.yml') }}
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniconda-version: "latest"
+        channels: conda-forge, defaults
+        use-only-tar-bz2: true
+        auto-update-conda: true
+        auto-activate-environment: jmade
+    - name: Run pylama
+      run: pylama -o FILE backend/pylama.ini
+      working-directory: ./backend
+    - name: Run isort
+      run: isort .
+      working-directory: ./backend
