@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: macos-latest
     defaults:
       run:
         shell: bash -l {0}
@@ -34,7 +34,7 @@ jobs:
       with:
         miniconda-version: "latest"
         auto-update-conda: true
-        environment-file: backend/environment_linux.yml
+        environment-file: backend/environment.yml
     - name: Run pylama
       run: pylama -o FILE backend/pylama.ini
       working-directory: ./backend
