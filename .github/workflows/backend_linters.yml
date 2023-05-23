@@ -36,7 +36,7 @@ jobs:
         channels: conda-forge, defaults
         use-only-tar-bz2: true
         auto-update-conda: true
-        auto-activate-environment: jmade
+        activate-environment: jmade
     - name: Run pylama
       run: pylama -o FILE backend/pylama.ini
       working-directory: ./backend
