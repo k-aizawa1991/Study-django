@@ -2,8 +2,6 @@ name: Backend Linters
 
 on:
   pull_request:
-    paths:
-      - 'backend/**'
   push:
     branches:
       - main
