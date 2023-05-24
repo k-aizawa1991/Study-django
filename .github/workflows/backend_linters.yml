@@ -35,8 +35,10 @@ jobs:
         miniconda-version: "latest"
         auto-update-conda: true
         environment-file: backend/environment.yml
+    - name: LS
+      run: ls $GITHUB_WORKSPACE/backend
     - name: Run pylama
-      run: pylama -v --options=pylama.ini .
+      run: pylama -v --options=$GITHUB_WORKSPACE/backend/pylama.ini .
       working-directory: ./backend
     - name: Run isort
       run: isort .
