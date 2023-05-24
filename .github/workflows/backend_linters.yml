@@ -38,7 +38,7 @@ jobs:
     - name: LS
       run: ls $GITHUB_WORKSPACE/backend
     - name: Run pylama
-      run: pylama -v --options=$GITHUB_WORKSPACE/backend/pylama.ini .
+      run: pylama
       working-directory: ./backend
     - name: Run isort
       run: isort .
