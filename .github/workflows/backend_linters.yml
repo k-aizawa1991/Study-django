@@ -36,7 +36,7 @@ jobs:
         auto-update-conda: true
         environment-file: backend/environment.yml
     - name: Run pylama
-      run: cd backend && pylama
+      run: pylama --options=backend/pylama.ini
     - name: Run isort
       run: isort .
       working-directory: ./backend
